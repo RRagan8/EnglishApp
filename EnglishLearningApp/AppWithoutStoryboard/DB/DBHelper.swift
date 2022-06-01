@@ -120,7 +120,7 @@ class DBHelper {
                 id INTEGER NOT NULL UNIQUE,
                 user_id INTEGER NOT NULL,
                 exercise_id INTEGER NOT NULL,
-                PRIMARY KEY(id AUTOINCREMENT)
+                PRIMARY KEY(id AUTOINCREMENT),
                 FOREIGN KEY (user_id)
                     REFERENCES user (id),
                 FOREIGN KEY (exercise_id)
@@ -133,9 +133,9 @@ class DBHelper {
                 user_id INTEGER NOT NULL,
                 test_id INTEGER NOT NULL,
                 finished INTEGER NOT NULL DEFAULT 0,
-                PRIMARY KEY(id AUTOINCREMENT)
+                PRIMARY KEY(id AUTOINCREMENT),
                 FOREIGN KEY (user_id)
-                    REFERENCES user (id)
+                    REFERENCES user (id),
                 FOREIGN KEY (test_id)
                     REFERENCES test (id)
             );
@@ -146,9 +146,9 @@ class DBHelper {
                 user_id INTEGER NOT NULL,
                 article_id INTEGER NOT NULL,
                 read INTEGER NOT NULL DEFAULT 0,
-                PRIMARY KEY(id AUTOINCREMENT)
+                PRIMARY KEY(id AUTOINCREMENT),
                 FOREIGN KEY (user_id)
-                    REFERENCES user (id)
+                    REFERENCES user (id),
                 FOREIGN KEY (article_id)
                     REFERENCES article (id)
             );
@@ -160,9 +160,9 @@ class DBHelper {
                 word_id INTEGER NOT NULL,
                 box_number INTEGER NOT NULL DEFAULT 1,
                 days_since_revision INTEGER,
-                PRIMARY KEY(id AUTOINCREMENT)
+                PRIMARY KEY(id AUTOINCREMENT),
                 FOREIGN KEY (user_id)
-                    REFERENCES user (id)
+                    REFERENCES user (id),
                 FOREIGN KEY (word_id)
                     REFERENCES word (id)
             );
@@ -239,7 +239,22 @@ class DBHelper {
                 "translation" TEXT NOT NULL,
                 PRIMARY KEY("id" AUTOINCREMENT)
             );
+            """,
             """
-]
+            CREATE TABLE IF NOT EXISTS word_by_user (
+                "id" INTEGER NOT NULL UNIQUE,
+                "user_id" INTEGER NOT NULL,
+                "user_word_id" INTEGER NOT NULL,
+                "word" TEXT NOT NULL,
+                "picture" TEXT,
+                "translation" TEXT NOT NULL,
+                PRIMARY KEY("id" AUTOINCREMENT),
+                FOREIGN KEY (user_id)
+                    REFERENCES user (id),
+                FOREIGN KEY (user_word_id)
+                    REFERENCES user_word (id)
+            );
+            """
+        ]
     }
 }
