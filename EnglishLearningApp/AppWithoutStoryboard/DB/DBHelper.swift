@@ -233,17 +233,6 @@ class DBHelper {
             CREATE TABLE IF NOT EXISTS word_by_user (
                 "id" INTEGER NOT NULL UNIQUE,
                 "user_id" INTEGER NOT NULL,
-                "user_word_id"
-                "word" TEXT NOT NULL,
-                "picture" TEXT,
-                "translation" TEXT NOT NULL,
-                PRIMARY KEY("id" AUTOINCREMENT)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS word_by_user (
-                "id" INTEGER NOT NULL UNIQUE,
-                "user_id" INTEGER NOT NULL,
                 "user_word_id" INTEGER NOT NULL,
                 "word" TEXT NOT NULL,
                 "picture" TEXT,
