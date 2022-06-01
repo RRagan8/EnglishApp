@@ -1,0 +1,134 @@
+BEGIN TRANSACTION;
+DROP TABLE IF EXISTS "user";
+CREATE TABLE IF NOT EXISTS "user" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"nickname"	TEXT,
+	"motivation_tag"	TEXT,
+	"motivation_specification"	TEXT,
+	"interests_tag"	TEXT,
+	"time_intervals"	INTEGER,
+	"telegram_notifications"	INTEGER,
+	"phone_notifications"	INTEGER,
+	"time_inactive"	INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "user_question";
+CREATE TABLE IF NOT EXISTS "user_question" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"user_id"	INTEGER NOT NULL,
+	"question_id"	INTEGER NOT NULL,
+	"answer"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "user_exercise";
+CREATE TABLE IF NOT EXISTS "user_exercise" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"user_id"	INTEGER NOT NULL,
+	"exercise_id"	INTEGER NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "user_test";
+CREATE TABLE IF NOT EXISTS "user_test" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"user_id"	INTEGER NOT NULL,
+	"test_id"	INTEGER NOT NULL,
+	"finished"	INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "user_article";
+CREATE TABLE IF NOT EXISTS "user_article" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"user_id"	INTEGER NOT NULL,
+	"article_id"	INTEGER NOT NULL,
+	"read"	INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "user_word";
+CREATE TABLE IF NOT EXISTS "user_word" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"user_id"	INTEGER NOT NULL,
+	"word_id"	INTEGER NOT NULL,
+	"box_number"	INTEGER NOT NULL DEFAULT 1,
+	"days_since_revision"	INTEGER,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "article";
+CREATE TABLE IF NOT EXISTS "article" (
+	"id "	INTEGER NOT NULL UNIQUE,
+	"description"	TEXT,
+	"pages_ids"	TEXT NOT NULL,
+	"topic_tags"	TEXT,
+	"picture"	TEXT,
+	PRIMARY KEY("id " AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "test";
+CREATE TABLE IF NOT EXISTS "test" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"pages_ids"	TEXT NOT NULL,
+	"picture"	TEXT,
+	"time_to_finish"	INTEGER,
+	"type_tags"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "exercise";
+CREATE TABLE IF NOT EXISTS "exercise" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"pages_ids"	TEXT NOT NULL,
+	"type_tags"	TEXT,
+	"topic_tags"	TEXT,
+	"picture"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "page";
+CREATE TABLE IF NOT EXISTS "page" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"question_ids"	INTEGER NOT NULL,
+	"task_type"	TEXT,
+	"picture"	TEXT,
+	"text"	TEXT,
+	"time_to_finish"	INTEGER,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "question";
+CREATE TABLE IF NOT EXISTS "question" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"text"	TEXT NOT NULL,
+	"answer"	TEXT NOT NULL,
+	"type_of_answer_field"	INTEGER,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "word";
+CREATE TABLE IF NOT EXISTS "word" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"word"	TEXT NOT NULL,
+	"picture"	TEXT,
+	"translation"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+INSERT INTO "word" ("id","word","picture","translation") VALUES
+ (1,'cat', "" ,'кошка'),
+ (2,'cease',"",'прекращать'),
+ (3,'caution',"",'осторожность'),
+ (4,'aid',"",'помощь'),
+ (5,'archaeologist',"",'археолог'),
+ (6,'adviser',"",'советник'),
+ (7,'capitalism',"",'капитализм'),
+ (8,'cheerfulness',"",'жизнерадостность'),
+ (9,'cliché',"",'клише'),
+ (10,'bond',"",'сближаться'),
+ (11,'under your breath',"",'очень тихо, "себе под нос"'),
+ (12,'adolescent',"",'подросток'),
+ (13,'carve',"",'вырезать'),
+ (14,'bully',"",'обидчик'),
+ (15,'charisma',"",'харизма'),
+ (16,'appoint',"",'назначать'),
+ (17,'bribe',"",'взятка'),
+ (18,'acquaintance',"",'знакомый'),
+ (19,'appliance',"",'прибор, устройство, оборудование'),
+ (20,'alliance',"",'альянс'),
+ (21,'audition',"",'прослушивание'),
+ (22,'exclaim',"",'воскликнуть'),
+ (23,'expenses',"",'расходы'),
+ (24,'condemn',"",'осуждать'),
+ (25,'fall flat',"",'не иметь успеха');
+COMMIT;
